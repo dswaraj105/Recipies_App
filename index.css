@@ -56,3 +56,17 @@
   display: flex;
   flex-wrap: wrap;
 }
+
+.fetch-more{
+  display: flex;
+  justify-content: center;
+}
+
+/* display recepie page styles
+============================== */
+.recepie-header {
+  display: flex;
+  justify-content: space-between;
+  margin-bottom: 10px;
+}
+

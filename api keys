@@ -1,0 +1,16 @@
+name: signup	
+id:   a6561902
+
+
+https://www.edamam.com/
+
+
+chicken recipies
+https://api.edamam.com/api/recipes/v2?type=public&q=chicken&app_id=a6561902&app_key=499f593c405f9c6151b2a0abd9da5360
+
+
+one
+https://api.edamam.com/api/recipes/v2/b79327d05b8e5b838ad6cfd9576b30b6?type=public&app_id=a6561902&app_key=499f593c405f9c6151b2a0abd9da5360
+
+
+https://api.edamam.com/search?q=chicken&app_id=4d537151&app_key=d9d78d79041c87d45d61f24146cf7da5&from=0&to=20
