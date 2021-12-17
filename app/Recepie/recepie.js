@@ -1,11 +1,12 @@
-let recepie = angular.module("recepieModule", []);
+let recepie = angular.module("recepieModule", ["ngCookies"]);
 
 recepie.controller("recepieController", [
   "$scope",
   "$location",
   "$routeParams",
   "$http",
-  function ($scope, $location, $routeParams, $http) {
+  "$cookies",
+  function ($scope, $location, $routeParams, $http, $cookies) {
     // Getting the id from param for identifying the food item
     $scope.msg = $routeParams.id;
 
@@ -28,7 +29,7 @@ recepie.controller("recepieController", [
             // console.log($scope.foodName);
           },
           function (err) {
-            console.log('err');
+            console.log("err");
             console.log(err);
           }
         );
@@ -37,18 +38,42 @@ recepie.controller("recepieController", [
     getIngredients($routeParams.id);
 
     // Taking the users back to the search page
-    $scope.goBack = function() {
-      $location.path('/');
-    }
+    $scope.goBack = function () {
+      $location.path("/");
+    };
 
-    // $scope.addToFavourates = function(foodName, id){
-    //   console.log("Adding to Favourated - ", foodName, id);
-    //   var item = {
-    //     name: foodName,
-    //     id: id
-    //   };
-    //   $cookies.put('foods', JSON.stringify(item));
-    // }
+    $scope.addToFavourates = function (foodName) {
+      
+      // Constructing the food item to be stored in a cookie
+      var item = {
+        name: foodName,
+        id: $routeParams.id,
+      };
+      console.log("Adding to Favourated - ", item);
 
+      // Getting the cookies data
+      var data = $cookies.getObject('foods');
+      let items = [];
+      
+      if(data){
+        items = data;
+      }
+      
+      // Checking if the item a=exists allready in the cookie
+      var index = items.findIndex(i => i.id === item.id);
+      console.log(index);
+
+      // If item exists we return
+      if(index != -1){
+        console.log("Item Exists");
+        return;
+      }
+
+      items.push(item);
+
+      // Setting the cookie
+      $cookies.putObject('foods', items);
+
+    };
   },
 ]);

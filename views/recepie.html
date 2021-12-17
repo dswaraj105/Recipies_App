@@ -2,7 +2,7 @@
   <div class="recepie-header" >
     <span ng-click="goBack()" ><i class="fas fa-long-arrow-alt-left fa-3x"></i></span>  
     <h4>{{foodName}}</h4>
-    <button class="btn btn-primary">Add To Favourates</button>
+    <button ng-click="addToFavourates(foodName)" class="btn btn-primary">Add To Favourates</button>
   </div>
   <ul class="list-group">
     <li class="list-group-item active" aria-current="true">

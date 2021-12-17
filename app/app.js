@@ -1,7 +1,8 @@
 let app = angular.module("recepieApp", [
   "ngRoute",
   "recepieModule",
-  "searchRecepieModule"
+  "searchRecepieModule",
+  "favourate"
 ]);
 
 
@@ -17,6 +18,10 @@ app.config([
       .when("/resecipe/:id", {                          // Route for details Page
         templateUrl: "views/recepie.html",
         controller: "recepieController",
+      })
+      .when("/favourates", {                          // Route for details Page
+        templateUrl: "views/favourates.html",
+        controller: "favourateController",
       })
       .otherwise({
         redirectTo: "/",

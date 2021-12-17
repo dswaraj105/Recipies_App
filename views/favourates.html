@@ -1,0 +1,15 @@
+<p>Favourates Page</p>
+
+<!-- displaying the fooditem names -->
+<div class="display-items container" >
+  <div  ng-repeat="item in foodItems">
+    <!-- {{ item.recipe.label }}
+    {{item._links.self}} -->
+    <div class="card" style="width: 18rem; margin: 10px; height: 126px;">
+      <div class="card-body">
+        <h5 class="card-title">{{ item.name }}</h5>
+        <button href="#" class="btn btn-primary" ng-click="loadDetailsPage(item.id)" >Show Recepie</button>
+      </div>
+    </div>
+  </div>
+</div>
