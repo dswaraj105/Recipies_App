@@ -1,10 +1,6 @@
-let app = angular.module("recepieApp", [
-  "ngRoute",
-  "recepieModule",
-  "searchRecepieModule",
-]);
+let searchRecepie = angular.module("searchRecepieModule", []);
 
-app.service("fetchData", [
+searchRecepie.service("fetchData", [
   "$http",
   function ($http) {
     // fetching the list of food names for search keyword
@@ -23,32 +19,14 @@ app.service("fetchData", [
   },
 ]);
 
-app.config([
-  // Routing Configration
-  "$routeProvider",
-  function ($routeProvider) {
-    $routeProvider
-      .when("/", {
-        templateUrl: "views/searchRecepie.html",
-        controller: "searchRecepieController",
-      })
-      .when("/resecipe", {
-        templateUrl: "views/recepie.html",
-        controller: "recepieController",
-      })
-      .otherwise({
-        redirectTo: "/",
-      });
-  },
-]);
-
-// Controller for search Page
-app.controller("c1", [
+searchRecepie.controller("searchRecepieController", [
   "$scope",
   "fetchData",
   "$http",
-  function ($scope, fetchData, $http) {
+  "$location",
+  function ($scope, fetchData, $http, $location) {
     $scope.foodItems = [];
+    $scope.showFetchMore = false;
 
     // function to handle the form submission to fetch food names
     $scope.getFoods = function (searchKey) {
@@ -87,22 +65,37 @@ app.controller("c1", [
         .get(
           `https://api.edamam.com/api/recipes/v2?type=public&q=${searchKey}&from=20&to=40&app_id=a6561902&app_key=499f593c405f9c6151b2a0abd9da5360`
         )
-        .then(function(res) {
-          console.log("Got Response");
+        .then(
+          function (res) {
+            console.log("Got Response");
 
-          var foodItems = res.data.hits;
-          console.log("2 - ", foodItems);
+            var foodItems = res.data.hits;
+            console.log("2 - ", foodItems);
 
-          $scope.foodItems = foodItems;
+            $scope.foodItems = foodItems;
+          },
+          function (err) {
+            console.log(err);
+          }
+        );
 
-        }, function (err) {
-          console.log(err);
-        });
+      // Clearing the input after successful response
+      $scope.searchKey = "";
+      if($scope.foodItems.length > 20){
+        console.log(foodItems.length);
+        $scope.showFetchMore = true;
+      } else {
+        $scope.showFetchMore = false;
+      }
     };
+
+    $scope.loadDetailsPage = function(url){
+
+      var parts = url.href.split("/");
+      console.log(parts);
+      // console.log(parts)
+
+      console.log("Loading details page - ", url.href);
+    }
   },
 ]);
-
-// Controller for the details page
-app.controller("c2", function ($scope) {
-  $scope.msg = "C2";
-});

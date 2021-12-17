@@ -1,0 +1,28 @@
+<div>
+
+  <!-- search section with form  -->
+  <div class="search-box">
+    <form class="search-form" ng-submit="getFoodsByKey(searchKey)" >
+      <input class="form-control search-input" type="text" name="searchName" ng-model="searchKey" placeholder="Search For Your Favourate Food">
+      <button type="submit"> Search </button>
+    </form>
+  </div>
+
+  <!-- displaying the fooditem names -->
+  <div class="display-items" >
+      <div  ng-repeat="item in foodItems">
+        <!-- {{ item.recipe.label }}
+        {{item._links.self}} -->
+        <div class="card" style="width: 18rem; margin: 10px; height: 126px;">
+          <div class="card-body">
+            <h5 class="card-title">{{ item.recipe.label }}</h5>
+            <button href="#" class="btn btn-primary" ng-click="loadDetailsPage(item._links.self)" >Show Recepie</button>
+          </div>
+        </div>
+      </div>
+  </div>
+
+  <div>
+    <button ng-show="foodItems.length" class="btn btn-primary" >Fetch More</button>
+  </div>
+</div>
