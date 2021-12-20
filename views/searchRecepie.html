@@ -1,28 +1,60 @@
 <div>
-
   <!-- search section with form  -->
   <div class="search-box">
-    <form class="search-form" ng-submit="getFoodsByKey(searchKey)" >
-      <input class="form-control search-input" type="text" name="searchName" ng-model="searchKey" placeholder="Search For Your Favourate Food">
-      <button class="btn" type="submit"> Search <i class="fas fa-search"></i> </button>
+    <form class="search-form" ng-submit="getFoodsByKey(searchKey)">
+      <input
+        class="form-control search-input"
+        type="text"
+        name="searchName"
+        ng-model="searchKey"
+        placeholder="Search For Your Favourate Food"
+      />
+      <button class="btn" type="submit">
+        Search <i class="fas fa-search"></i>
+      </button>
     </form>
   </div>
 
   <!-- displaying the fooditem names -->
-  <div class="display-items container" >
-      <div  ng-repeat="item in foodItems">
-        <!-- {{ item.recipe.label }}
+  <div class="display-items container">
+    <div ng-repeat="item in foodItems">
+      <!-- {{ item.recipe.label }}
         {{item._links.self}} -->
-        <div class="card" style="width: 18rem; margin: 10px; height: 126px;">
-          <div class="card-body">
-            <h5 class="card-title">{{ item.recipe.label }}</h5>
-            <button href="#" class="btn btn-primary" ng-click="loadDetailsPage(item.recipe.uri)" >Show Recepie</button>
-          </div>
+      <div class="card" style="width: 18rem; margin: 10px; height: 126px">
+        <div class="card-body">
+          <h5 class="card-title">{{ item.recipe.label }}</h5>
+          <button
+            href="#"
+            class="btn btn-primary"
+            ng-click="loadDetailsPage(item.recipe.uri)"
+          >
+            Show Recepie
+          </button>
         </div>
       </div>
+    </div>
   </div>
 
-  <div class="fetch-more">
-    <button ng-click="getNextPage()" ng-show="showFetchMore" class="btn btn-primary" >Fetch More</button>
+  <!-- loading spinner with conditional display -->
+  <div class="center-child" ng-show="showSpinner" >
+    <div class="spinner-border" role="status">
+      <span class="visually-hidden">Loading...</span>
+    </div>
+  </div>
+
+  <!-- Error if we don't get any data for the searches  -->
+  <div class="center-child" ng-show="badSearchMsg" >
+    <p> {{ badSearchMsg }} </p>
+  </div>
+
+  <!-- button fetch more with conditional display  -->
+  <div class="center-child">
+    <button
+      ng-click="getNextPage()"
+      ng-show="showFetchMore"
+      class="btn btn-primary"
+    >
+      Fetch More
+    </button>
   </div>
 </div>

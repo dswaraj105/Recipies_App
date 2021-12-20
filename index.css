@@ -57,7 +57,7 @@
   flex-wrap: wrap;
 }
 
-.fetch-more{
+.center-child{
   display: flex;
   justify-content: center;
 }

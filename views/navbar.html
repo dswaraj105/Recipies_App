@@ -1,9 +1,12 @@
 <!-- Default Navbar for everyPage -->
 
-<nav class="navbar">
+<nav class="navbar" ng-controller="favourateController" >
   <span class="logo">Recipica</span>
   <ul class="nav-ul">
-    <li><a class="nav-li" href="#!/">Search Recepie</a></li>
-    <li><a class="nav-li" href="#!/favourates">Favourates</a></li>
+    <li><a class="nav-li btn btn-danger" href="#!/">Search Recepie</a></li>
+    <li><a class="nav-li btn btn-primary" href="#!/favourates">Favourates  <span class="badge bg-secondary"> {{favCount}} </span> </a></li>
+    <li>
+
+    </li>
   </ul>
 </nav>
